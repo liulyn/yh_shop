@@ -773,13 +773,14 @@ if (!function_exists('function_usable')) {
 }
 
 if (!function_exists('p')) {
-	function p($data){
+	function p($data)
+	{
 		echo '<pre>';
 		print_r($data);
 		echo '</pre>';
 	}
 }
-if (!function_exists('yoshop_hash')){
+if (!function_exists('yoshop_hash')) {
 	/**
 	 * 生成密码hash值
 	 * @param $password
@@ -788,5 +789,19 @@ if (!function_exists('yoshop_hash')){
 	function yoshop_hash($password)
 	{
 		return md5(md5($password) . 'yoshop_salt_SmTRx');
+	}
+}
+
+if (!function_exists('exit_json')) {
+	/**
+	 * 输出json
+	 * @param int $errorCode
+	 * @param string $errorMessage
+	 * @param array $data
+	 */
+	function exit_json($errorCode = 0, $errorMessage = '', $data = [])
+	{
+		header('Content-Type:application/json');
+		exit(json_encode(['errorCode' => $errorCode, 'errorMessage' => $errorMessage, 'data' => $data],JSON_UNESCAPED_UNICODE));
 	}
 }

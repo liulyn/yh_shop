@@ -11,7 +11,6 @@ class Site extends CI_Controller
 	public function index()
 	{
 		$this->login();
-
 	}
 
 	/**
@@ -21,11 +20,10 @@ class Site extends CI_Controller
 	{
 		if ($this->input->is_ajax_request()) {
 			$this->load->model('store_user_model');
-//			$result = $this->store_user_model->login_2($this->input->post('User'));
 			if($this->store_user_model->login_2($this->input->post('User'))){
-				exit('登录成功');
+				exit_json(0,'登录成功');
 			}
-			exit('登录失败');
+			exit_json(1,'登录失败');
 		}
 		$this->load->view('admin/login');
 	}
