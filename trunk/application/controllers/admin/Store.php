@@ -1,0 +1,29 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+require_once(__DIR__ . '/Controller.php');
+
+/**
+ * 商城后台
+ * Class Store
+ */
+class Store extends Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * 商城后台首页
+     */
+    public function index()
+    {
+        $data = [
+            'controller' => $this->controller,
+            'menus' => $this->menus
+        ];
+        $this->load->view('/admin/store/header',$data);
+        $this->load->view('/admin/store/index');
+        $this->load->view('/admin/store/footer');
+    }
+}

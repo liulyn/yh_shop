@@ -49,13 +49,13 @@
                 // url: '',
                 success: function (result) {
                     $btn_submit.attr('disabled', false);
-                    if (result.code === 1) {
-                        layer.msg(result.msg, {time: 1500, anim: 1}, function () {
+                    if (result.errorCode === 0) {
+                        layer.msg(result.errorMessage, {time: 1500, anim: 1}, function () {
                             window.location = result.url;
                         });
                         return true;
                     }
-                    layer.msg(result.msg, {time: 1500, anim: 6});
+                    layer.msg(result.errorMessage, {time: 1500, anim: 6});
                 }
             });
             return false;
