@@ -32,4 +32,14 @@ class Site extends CI_Controller
         }
         $this->load->view('admin/site/login');
     }
+
+    /**
+     * 退出登录
+     */
+    public function logout()
+    {
+        $this->load->library('session');
+        $this->session->sess_destroy();
+        redirect_url('/admin/site');
+    }
 }

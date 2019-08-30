@@ -13,6 +13,8 @@ class Controller extends CI_Controller
     protected $store;
     /** @var string  当前路由控制器 */
     protected $controller;
+    /** @var 当前控制器下的方法 */
+    protected $method;
     /** @var 当前路由uri */
     protected $route_uri;
     /** @var 菜单配置 */
@@ -24,6 +26,7 @@ class Controller extends CI_Controller
         $this->load->library('session');
         $this->store = $this->session->store;
         $this->controller = $this->router->class;
+        $this->method = $this->router->method;
         $this->route_uri = '/' . ($this->router->directory ?: '') . $this->router->class . '/' . $this->router->method;
         $this->check_login();
         $this->menus = $this->menus();
@@ -92,5 +95,16 @@ class Controller extends CI_Controller
             $i++;
         }
         return $data;
+    }
+
+    public function load_view($data = [])
+    {
+        $header_data = [
+            'controller' => $this->controller,
+            'menus' => $this->menus
+        ];
+        $this->load->view('/admin/header', $header_data);
+        $this->load->view($this->route_uri, $data);
+        $this->load->view('/admin/footer');
     }
 }

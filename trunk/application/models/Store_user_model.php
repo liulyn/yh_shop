@@ -4,7 +4,8 @@
 class Store_user_model extends MY_model
 //class Store_user_model extends CI_Model
 {
-    protected static $table_name = 'store_user';
+    /** @var string 表名 */
+    protected $table_name = 'store_user';
 
     public function __construct()
     {
@@ -18,10 +19,11 @@ class Store_user_model extends MY_model
      */
     public function login($data)
     {
-        if (!$res = $this->db->select('*')->from(self::$table_name)->where([
+        if (!$res = $this->get_row_by_where([
             'user_name' => $data['user_name'],
             'password' => shop_hash($data['password'])
-        ])->get()->row_array()) {
+        ])
+        ) {
             $this->error = '登录失败，用户名或密码错误';
             return false;
         }
@@ -33,6 +35,28 @@ class Store_user_model extends MY_model
             ],
             'is_login' => true,
         ];
+        return true;
+    }
+
+    /**
+     * 更新当前管理员信息
+     * @param $data
+     * @return bool
+     */
+    public function renew($store_user_id, $data)
+    {
+        if ($data['password'] !== $data['password_confirm']) {
+            $this->error = '密码不一致';
+            return false;
+        }
+        // 更新管理员信息
+        if ( !$this->update_by_where(['store_user_id' => $store_user_id], [
+            'password' => shop_hash($data['password']),
+            'update_time' => time(),
+        ])) {
+            $this->error = '更新数据库失败';
+            return false;
+        }
         return true;
     }
 }

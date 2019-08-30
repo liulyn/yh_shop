@@ -18,12 +18,6 @@ class Goods extends Controller
      */
     public function index()
     {
-        $data = [
-            'controller' => $this->controller,
-            'menus' => $this->menus
-        ];
-        $this->load->view('/admin/store/header', $data);
-        $this->load->view('/admin/store/index');
-        $this->load->view('/admin/store/footer');
+        $this->load_view();
     }
 }

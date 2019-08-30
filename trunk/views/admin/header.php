@@ -40,7 +40,7 @@
                 <ul>
                     <!-- 欢迎语 -->
                     <li class="am-text-sm tpl-header-navbar-welcome">
-                        <a href="/admin/store/renew') ?>">欢迎你，<span><?= $_SESSION['store']['user']['user_name'] ?></span>
+                        <a href="/admin/store/renew">欢迎你，<span><?= $_SESSION['store']['user']['user_name'] ?></span>
                         </a>
                     </li>
                     <!-- 退出 -->

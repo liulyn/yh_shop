@@ -55,8 +55,8 @@
                             dataType: "json",
                             data: option.buildData(),
                             success: function (result) {
-                                result.code === 1 ? $.show_success(result.msg, result.url)
-                                    : $.show_error(result.msg);
+                                result.errorCode === 0 ? $.show_success(result.errorMessage, result.url)
+                                    : $.show_error(result.errorMessage);
                                 btn_submit.attr('disabled', false);
                             }
                         });
