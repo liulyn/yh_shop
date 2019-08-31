@@ -2,7 +2,6 @@
 
 
 class Store_user_model extends MY_model
-//class Store_user_model extends CI_Model
 {
     /** @var string 表名 */
     protected $table_name = 'store_user';

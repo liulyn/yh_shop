@@ -20,10 +20,18 @@ class MY_model extends CI_Model
      * 获取单行数据
      * @param $where
      * @param string $field
+	 * @param string $order_by
+	 * @param array $join
      * @return mixed
      */
-    public function get_row_by_where($where, $field = '*')
+    public function get_row_by_where($where, $field = '*',$order_by='',$join=[])
     {
+    	if($order_by){
+    		$this->db->order_by($order_by);
+		}
+		if($join){
+			$this->db->join($join[0],$join[1],$join[2]);
+		}
         return $this->db->select($field)->from($this->table_name)->where($where)->get()->row_array();
     }
 
