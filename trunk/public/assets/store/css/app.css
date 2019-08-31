@@ -251,12 +251,12 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
         .left-sidebar .sidebar-nav .sidebar-nav-link a.active {
           cursor: pointer;
           color: #fff;
-          background: #009688; }
+          background: #1686ef; }
           .left-sidebar .sidebar-nav .sidebar-nav-link a.active .sidebar-nav-link-logo {
             color: #fff !important; }
         .left-sidebar .sidebar-nav .sidebar-nav-link a:hover {
           color: #fff;
-          border-left: #009688 3px solid; }
+          border-left: #1686ef 3px solid; }
   .left-sidebar .left-sidebar-second {
     width: 120px;
     min-height: 100%;

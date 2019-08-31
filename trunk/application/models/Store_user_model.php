@@ -30,6 +30,7 @@ class Store_user_model extends MY_model
         $this->CI->load->library('session');
         $this->CI->session->store = [
             'user' => [
+                'store_id' => $res['store_id'],
                 'store_user_id' => $res['store_user_id'],
                 'user_name' => $res['user_name'],
             ],
