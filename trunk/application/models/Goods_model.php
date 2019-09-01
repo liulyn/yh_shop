@@ -28,7 +28,10 @@ class Goods_model extends MY_model
 		$this->db->from($this->table_name);
 		$this->db->join('category',"{$this->table_name}.category_id = category.category_id",'left');
 //		$this->db->join('goods_image',"{$this->table_name}.goods_id = goods_image.goods_id",'right');
-		if($limit){
+		if($where){
+		    $this->db->where($where);
+        }
+        if($limit){
 			$this->db->limit($limit);
 		}
 		if($offset){

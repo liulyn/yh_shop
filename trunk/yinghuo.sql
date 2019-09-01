@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 100137
  Source Host           : 127.0.0.1:3306
- Source Schema         : yinghuo_shop
+ Source Schema         : yinghuo
 
  Target Server Type    : MySQL
  Target Server Version : 100137
  File Encoding         : 65001
 
- Date: 01/09/2019 19:41:54
+ Date: 01/09/2019 19:41:44
 */
 
 SET NAMES utf8mb4;
@@ -23,23 +23,22 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `yoshop_category`;
 CREATE TABLE `yoshop_category` (
   `category_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品分类id',
-  `store_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商城id',
-  `category_name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
   `parent_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '上级分类id',
   `image_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '分类图片id',
   `sort` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序方式(数字越小越靠前)',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`category_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10003 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_category
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_category` VALUES (10001, 10001, '衣服', 0, 10001, 100, 10001, 1566816477, 1566816597);
-INSERT INTO `yoshop_category` VALUES (10002, 10001, '男装', 10001, 0, 100, 10001, 1566910584, 1566910584);
+INSERT INTO `yoshop_category` VALUES (1, '衣服', 0, 0, 100, 10001, 1567331876, 1567331876);
+INSERT INTO `yoshop_category` VALUES (2, '男装', 1, 0, 100, 10001, 1567331884, 1567331884);
 COMMIT;
 
 -- ----------------------------
@@ -54,14 +53,14 @@ CREATE TABLE `yoshop_delivery` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序方式(数字越小越靠前)',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`delivery_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`delivery_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_delivery
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_delivery` VALUES (1, '测试', 10, 100, 10001, 1566912609, 1566912609);
+INSERT INTO `yoshop_delivery` VALUES (1, '物流', 10, 100, 10001, 1567331358, 1567331358);
 COMMIT;
 
 -- ----------------------------
@@ -78,14 +77,14 @@ CREATE TABLE `yoshop_delivery_rule` (
   `additional_fee` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '续费(元)',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL COMMENT '创建时间',
-  PRIMARY KEY (`rule_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`rule_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_delivery_rule
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_delivery_rule` VALUES (1, 1, '2,20,38,61,76,84,104,124,150,168,180,197,208,221,232,244,250,264,271,278,290,304,319,337,352,362,372,376,389,398,407,422,430,442,449,462,467,481,492,500,508,515,522,530,537,545,553,558,566,574,581,586,597,607,614,619,627,634,640,646,656,675,692,702,711,720,730,748,759,764,775,782,793,802,821,833,842,853,861,871,880,887,896,906,913,920,927,934,948,960,972,980,986,993,1003,1010,1015,1025,1035,1047,1057,1066,1074,1081,1088,1093,1098,1110,1118,1127,1136,1142,1150,1155,1160,1169,1183,1190,1196,1209,1222,1234,1245,1253,1264,1274,1279,1285,1299,1302,1306,1325,1339,1350,1362,1376,1387,1399,1408,1415,1421,1434,1447,1459,1466,1471,1476,1479,1492,1504,1513,1522,1533,1546,1556,1572,1583,1593,1599,1612,1623,1630,1637,1643,1650,1664,1674,1685,1696,1707,1710,1724,1731,1740,1754,1764,1768,1774,1782,1791,1802,1809,1813,1822,1828,1838,1848,1854,1867,1880,1890,1900,1905,1912,1924,1936,1949,1955,1988,1999,2003,2011,2017,2025,2035,2041,2050,2056,2065,2070,2077,2082,2091,2123,2146,2150,2156,2163,2177,2189,2207,2215,2220,2225,2230,2236,2245,2258,2264,2276,2283,2292,2297,2302,2306,2324,2363,2368,2388,2395,2401,2409,2416,2426,2434,2440,2446,2458,2468,2475,2486,2493,2501,2510,2516,2521,2535,2554,2573,2584,2589,2604,2611,2620,2631,2640,2657,2671,2686,2696,2706,2712,2724,2730,2741,2750,2761,2775,2784,2788,2801,2807,2812,2817,2826,2845,2857,2870,2882,2890,2899,2913,2918,2931,2946,2958,2972,2984,2997,3008,3016,3023,3032,3036,3039,3045,3053,3058,3065,3073,3081,3090,3098,3108,3117,3127,3135,3142,3147,3152,3158,3165,3172,3179,3186,3190,3196,3202,3207,3216,3221,3225,3229,3237,3242,3252,3262,3267,3280,3289,3301,3309,3317,3326,3339,3378,3386,3416,3454,3458,3461,3491,3504,3518,3532,3551,3578,3592,3613,3632,3666,3683,3697,3704,3711,3717,3722,3728,3739,3745,3747', 1, 0.00, 0, 0.00, 10001, 1566912609);
+INSERT INTO `yoshop_delivery_rule` VALUES (1, 1, '2,20,38,61,76,84,104,124,150,168,180,197,208,221,232,244,250,264,271,278,290,304,319,337,352,362,372,376,389,398,407,422,430,442,449,462,467,481,492,500,508,515,522,530,537,545,553,558,566,574,581,586,597,607,614,619,627,634,640,646,656,675,692,702,711,720,730,748,759,764,775,782,793,802,821,833,842,853,861,871,880,887,896,906,913,920,927,934,948,960,972,980,986,993,1003,1010,1015,1025,1035,1047,1057,1066,1074,1081,1088,1093,1098,1110,1118,1127,1136,1142,1150,1155,1160,1169,1183,1190,1196,1209,1222,1234,1245,1253,1264,1274,1279,1285,1299,1302,1306,1325,1339,1350,1362,1376,1387,1399,1408,1415,1421,1434,1447,1459,1466,1471,1476,1479,1492,1504,1513,1522,1533,1546,1556,1572,1583,1593,1599,1612,1623,1630,1637,1643,1650,1664,1674,1685,1696,1707,1710,1724,1731,1740,1754,1764,1768,1774,1782,1791,1802,1809,1813,1822,1828,1838,1848,1854,1867,1880,1890,1900,1905,1912,1924,1936,1949,1955,1965,1977,1988,1999,2003,2011,2017,2025,2035,2041,2050,2056,2065,2070,2077,2082,2091,2123,2146,2150,2156,2163,2177,2189,2207,2215,2220,2225,2230,2236,2245,2258,2264,2276,2283,2292,2297,2302,2306,2324,2363,2368,2388,2395,2401,2409,2416,2426,2434,2440,2446,2458,2468,2475,2486,2493,2501,2510,2516,2521,2535,2554,2573,2584,2589,2604,2611,2620,2631,2640,2657,2671,2686,2696,2706,2712,2724,2730,2741,2750,2761,2775,2784,2788,2801,2807,2812,2817,2826,2845,2857,2870,2882,2890,2899,2913,2918,2931,2946,2958,2972,2984,2997,3008,3016,3023,3032,3036,3039,3045,3053,3058,3065,3073,3081,3090,3098,3108,3117,3127,3135,3142,3147,3152,3158,3165,3172,3179,3186,3190,3196,3202,3207,3216,3221,3225,3229,3237,3242,3252,3262,3267,3280,3289,3301,3309,3317,3326,3339,3378,3386,3416,3454,3458,3461,3491,3504,3518,3532,3551,3578,3592,3613,3632,3666,3683,3697,3704,3711,3717,3722,3728,3739,3745,3747', 1, 0.00, 0, 0.00, 10001, 1567331358);
 COMMIT;
 
 -- ----------------------------
@@ -97,8 +96,8 @@ CREATE TABLE `yoshop_dictionary` (
   `type` varchar(30) NOT NULL DEFAULT '' COMMENT '字段类型',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '字段名称',
   `value` varchar(255) NOT NULL COMMENT '字段记录',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for yoshop_goods
@@ -106,7 +105,6 @@ CREATE TABLE `yoshop_dictionary` (
 DROP TABLE IF EXISTS `yoshop_goods`;
 CREATE TABLE `yoshop_goods` (
   `goods_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品id',
-  `store_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商城id',
   `goods_name` varchar(255) NOT NULL DEFAULT '' COMMENT '商品名称',
   `category_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品分类id',
   `spec_type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '商品规格(10单规格 20多规格)',
@@ -121,16 +119,16 @@ CREATE TABLE `yoshop_goods` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`goods_id`) USING BTREE,
-  KEY `category_id` (`category_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`goods_id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_goods
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_goods` VALUES (1, 10001, '单规格--卡通男装', 10001, 10, 10, '&lt;p&gt;&lt;img src=&quot;http://devyh.com/uploads/20190901174952a62dd1782.png&quot; _src=&quot;http://devyh.com/uploads/20190901174952a62dd1782.png&quot;/&gt;&lt;/p&gt;', 23, 0, 100, 1, 10, 0, 10001, 1567331401, 1567331401);
-INSERT INTO `yoshop_goods` VALUES (2, 10001, '多规格--卡通男装', 10002, 20, 20, '&lt;p&gt;&lt;img src=&quot;http://devyh.com/uploads/2019090117525269a036642.png&quot; _src=&quot;http://devyh.com/uploads/2019090117525269a036642.png&quot;/&gt;&lt;/p&gt;', 0, 0, 100, 1, 10, 0, 10001, 1567331574, 1567331574);
+INSERT INTO `yoshop_goods` VALUES (1, '单规格--卡通男装', 2, 10, 10, '&lt;p&gt;&lt;img src=&quot;http://devyh.com/uploads/20190901174952a62dd1782.png&quot; _src=&quot;http://devyh.com/uploads/20190901174952a62dd1782.png&quot;/&gt;&lt;/p&gt;', 23, 0, 100, 1, 10, 0, 10001, 1567331401, 1567333474);
+INSERT INTO `yoshop_goods` VALUES (2, '多规格--卡通男装', 2, 20, 20, '&lt;p&gt;&lt;img src=&quot;http://devyh.com/uploads/2019090117525269a036642.png&quot; _src=&quot;http://devyh.com/uploads/2019090117525269a036642.png&quot;/&gt;&lt;/p&gt;', 0, 0, 100, 1, 10, 0, 10001, 1567331574, 1567331574);
 COMMIT;
 
 -- ----------------------------
@@ -143,17 +141,17 @@ CREATE TABLE `yoshop_goods_image` (
   `image_id` int(11) NOT NULL COMMENT '图片id(关联文件记录表)',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_goods_image
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_goods_image` VALUES (1, 1, 2, 10001, 1567331401);
-INSERT INTO `yoshop_goods_image` VALUES (2, 1, 1, 10001, 1567331401);
 INSERT INTO `yoshop_goods_image` VALUES (3, 2, 3, 10001, 1567331574);
 INSERT INTO `yoshop_goods_image` VALUES (4, 2, 2, 10001, 1567331574);
+INSERT INTO `yoshop_goods_image` VALUES (7, 1, 2, 10001, 1567333474);
+INSERT INTO `yoshop_goods_image` VALUES (8, 1, 1, 10001, 1567333474);
 COMMIT;
 
 -- ----------------------------
@@ -173,18 +171,18 @@ CREATE TABLE `yoshop_goods_spec` (
   `spec_sku_id` varchar(255) NOT NULL DEFAULT '' COMMENT '商品spu标识',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`goods_spec_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`goods_spec_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_goods_spec
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_goods_spec` VALUES (1, 1, 'asd1', 100.00, 120.00, 999, 0, 10, 10001, '', 1567331401, 1567331401);
 INSERT INTO `yoshop_goods_spec` VALUES (2, 2, 'asd2', 110.00, 150.00, 999, 0, 11, 10001, '1_3', 1567331574, 1567331574);
 INSERT INTO `yoshop_goods_spec` VALUES (3, 2, 'asd3', 120.00, 160.00, 888, 0, 12, 10001, '1_4', 1567331574, 1567331574);
 INSERT INTO `yoshop_goods_spec` VALUES (4, 2, 'asd4', 130.00, 170.00, 777, 0, 13, 10001, '2_3', 1567331574, 1567331574);
 INSERT INTO `yoshop_goods_spec` VALUES (5, 2, 'asd5', 140.00, 180.00, 666, 0, 14, 10001, '2_4', 1567331574, 1567331574);
+INSERT INTO `yoshop_goods_spec` VALUES (7, 1, 'asd1', 100.00, 120.00, 999, 0, 10, 10001, '', 1567333474, 1567333474);
 COMMIT;
 
 -- ----------------------------
@@ -198,8 +196,8 @@ CREATE TABLE `yoshop_goods_spec_rel` (
   `spec_value_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '规格值id',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_goods_spec_rel
@@ -235,9 +233,9 @@ CREATE TABLE `yoshop_order` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`order_id`) USING BTREE,
+  PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_no` (`order_no`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for yoshop_order_address
@@ -256,7 +254,7 @@ CREATE TABLE `yoshop_order_address` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`order_address_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for yoshop_order_goods
@@ -284,7 +282,7 @@ CREATE TABLE `yoshop_order_goods` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`order_goods_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for yoshop_region
@@ -303,9 +301,9 @@ CREATE TABLE `yoshop_region` (
   `first` varchar(50) DEFAULT NULL COMMENT '首字母',
   `lng` varchar(100) DEFAULT NULL COMMENT '经度',
   `lat` varchar(100) DEFAULT NULL COMMENT '纬度',
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `name,level` (`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3749 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`id`),
+  KEY `name,level` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3749 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_region
@@ -4071,8 +4069,8 @@ CREATE TABLE `yoshop_setting` (
   `values` mediumtext NOT NULL COMMENT '设置内容（json格式）',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  UNIQUE KEY `unique_key` (`key`,`wxapp_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `unique_key` (`key`,`wxapp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_setting
@@ -4093,8 +4091,8 @@ CREATE TABLE `yoshop_spec` (
   `spec_name` varchar(255) NOT NULL DEFAULT '' COMMENT '规格组名称',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) NOT NULL COMMENT '创建时间',
-  PRIMARY KEY (`spec_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`spec_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_spec
@@ -4114,8 +4112,8 @@ CREATE TABLE `yoshop_spec_value` (
   `spec_id` int(11) NOT NULL COMMENT '规格组id',
   `wxapp_id` int(11) NOT NULL COMMENT '小程序id',
   `create_time` int(11) NOT NULL COMMENT '创建时间',
-  PRIMARY KEY (`spec_value_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`spec_value_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_spec_value
@@ -4128,58 +4126,25 @@ INSERT INTO `yoshop_spec_value` VALUES (4, '中', 2, 10001, 1567331510);
 COMMIT;
 
 -- ----------------------------
--- Table structure for yoshop_store
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_store`;
-CREATE TABLE `yoshop_store` (
-  `store_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `update_time` int(11) NOT NULL COMMENT '更新时间',
-  PRIMARY KEY (`store_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='商城表';
-
--- ----------------------------
--- Records of yoshop_store
--- ----------------------------
-BEGIN;
-INSERT INTO `yoshop_store` VALUES (10001, 1567162122, 0);
-COMMIT;
-
--- ----------------------------
--- Table structure for yoshop_store_role
--- ----------------------------
-DROP TABLE IF EXISTS `yoshop_store_role`;
-CREATE TABLE `yoshop_store_role` (
-  `store_role_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `store_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '主键id',
-  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '角色名',
-  `parent_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '上级角色id',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`store_role_id`) USING BTREE,
-  UNIQUE KEY `name` (`name`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='角色表';
-
--- ----------------------------
 -- Table structure for yoshop_store_user
 -- ----------------------------
 DROP TABLE IF EXISTS `yoshop_store_user`;
 CREATE TABLE `yoshop_store_user` (
   `store_user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `store_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商城id',
-  `user_name` varchar(255) NOT NULL DEFAULT '' COMMENT '用户名，为了全局唯一，除了初始超级管理员账号，其他账号格式为：56@xxxxx,56为store表主键，xxx为自定义用户名',
+  `user_name` varchar(255) NOT NULL DEFAULT '' COMMENT '用户名',
   `password` varchar(255) NOT NULL DEFAULT '' COMMENT '登录密码',
+  `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`store_user_id`) USING BTREE,
-  UNIQUE KEY `user_name` (`user_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  `update_time` int(11) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`store_user_id`),
+  UNIQUE KEY `user_name` (`user_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 COMMENT='商城后台管理员表';
 
 -- ----------------------------
 -- Records of yoshop_store_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_store_user` VALUES (10001, 10001, 'admin1', '9c4cb25665cf08667c815420ab383cb5', 1567162122, 1567243800);
+INSERT INTO `yoshop_store_user` VALUES (10001, 'admin', '9ae7b2e6f25c907a1fc81b503b16e25f', 10001, 1529926348, 1531027042);
 COMMIT;
 
 -- ----------------------------
@@ -4198,19 +4163,19 @@ CREATE TABLE `yoshop_upload_file` (
   `is_delete` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '软删除',
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  PRIMARY KEY (`file_id`) USING BTREE,
-  UNIQUE KEY `path_idx` (`file_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10003 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`file_id`),
+  UNIQUE KEY `path_idx` (`file_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_upload_file
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_upload_file` VALUES (1, 'local', 1001, '', '201909011747311e37a5372.png', 1136, 'image', 'png', 0, 10001, 1567331251);
-INSERT INTO `yoshop_upload_file` VALUES (2, 'local', 1001, '', '20190901174814713379916.jpeg', 16890, 'image', 'jpeg', 0, 10001, 1567331294);
-INSERT INTO `yoshop_upload_file` VALUES (3, 'local', 1001, '', '2019090117484813fbc6719.png', 44226, 'image', 'png', 0, 10001, 1567331328);
-INSERT INTO `yoshop_upload_file` VALUES (4, 'local', 1001, '', '20190901174952a62dd1782.png', 44226, 'image', 'png', 0, 10001, 1567331392);
-INSERT INTO `yoshop_upload_file` VALUES (5, 'local', 1001, '', '2019090117525269a036642.png', 1136, 'image', 'png', 0, 10001, 1567331572);
+INSERT INTO `yoshop_upload_file` VALUES (1, 'local', 0, '', '201909011747311e37a5372.png', 1136, 'image', 'png', 0, 10001, 1567331251);
+INSERT INTO `yoshop_upload_file` VALUES (2, 'local', 0, '', '20190901174814713379916.jpeg', 16890, 'image', 'jpeg', 0, 10001, 1567331294);
+INSERT INTO `yoshop_upload_file` VALUES (3, 'local', 0, '', '2019090117484813fbc6719.png', 44226, 'image', 'png', 0, 10001, 1567331328);
+INSERT INTO `yoshop_upload_file` VALUES (4, 'local', 0, '', '20190901174952a62dd1782.png', 44226, 'image', 'png', 0, 10001, 1567331392);
+INSERT INTO `yoshop_upload_file` VALUES (5, 'local', 0, '', '2019090117525269a036642.png', 1136, 'image', 'png', 0, 10001, 1567331572);
 COMMIT;
 
 -- ----------------------------
@@ -4225,16 +4190,9 @@ CREATE TABLE `yoshop_upload_group` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`group_id`) USING BTREE,
-  KEY `type_index` (`group_type`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
--- ----------------------------
--- Records of yoshop_upload_group
--- ----------------------------
-BEGIN;
-INSERT INTO `yoshop_upload_group` VALUES (10001, 'image', '衣服', 100, 10001, 1566816922, 1566816922);
-COMMIT;
+  PRIMARY KEY (`group_id`),
+  KEY `type_index` (`group_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for yoshop_user
@@ -4253,9 +4211,9 @@ CREATE TABLE `yoshop_user` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`user_id`) USING BTREE,
-  KEY `openid` (`open_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`user_id`),
+  KEY `openid` (`open_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for yoshop_user_address
@@ -4273,8 +4231,8 @@ CREATE TABLE `yoshop_user_address` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`address_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`address_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for yoshop_wxapp
@@ -4285,19 +4243,23 @@ CREATE TABLE `yoshop_wxapp` (
   `app_name` varchar(50) NOT NULL DEFAULT '' COMMENT '小程序名称',
   `app_id` varchar(50) NOT NULL DEFAULT '' COMMENT '小程序AppID',
   `app_secret` varchar(50) NOT NULL DEFAULT '' COMMENT '小程序AppSecret',
+  `is_service` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '客服按钮(0不显示 1显示)',
+  `service_image_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '客服图标(关联文件记录表id)',
+  `is_phone` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '电话客服按钮(0不显示 1显示)',
+  `phone_no` varchar(20) NOT NULL DEFAULT '' COMMENT '电话号码',
+  `phone_image_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '电话图标',
   `mchid` varchar(50) NOT NULL DEFAULT '' COMMENT '微信商户号id',
   `apikey` varchar(255) NOT NULL DEFAULT '' COMMENT '微信支付密钥',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`wxapp_id`) USING BTREE,
-  UNIQUE KEY `app_id` (`app_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`wxapp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_wxapp
 -- ----------------------------
 BEGIN;
-INSERT INTO `yoshop_wxapp` VALUES (10001, '潮刘商', 'wxa9766ad2f9e150d0', '3da3297c707ba40694c1fd2820b15966', '', '', 1567251423, 0);
+INSERT INTO `yoshop_wxapp` VALUES (10001, '萤火小程序商城', '', '', 0, 0, 0, '', 0, '', '', 1529926348, 1530343820);
 COMMIT;
 
 -- ----------------------------
@@ -4312,8 +4274,8 @@ CREATE TABLE `yoshop_wxapp_help` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`help_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`help_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_wxapp_help
@@ -4333,8 +4295,8 @@ CREATE TABLE `yoshop_wxapp_navbar` (
   `top_background_color` varchar(10) NOT NULL DEFAULT '' COMMENT '顶部导航背景色',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`wxapp_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`wxapp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_wxapp_navbar
@@ -4354,9 +4316,9 @@ CREATE TABLE `yoshop_wxapp_page` (
   `wxapp_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '微信小程序id',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`page_id`) USING BTREE,
-  KEY `wxapp_id` (`wxapp_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+  PRIMARY KEY (`page_id`),
+  KEY `wxapp_id` (`wxapp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10002 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yoshop_wxapp_page

@@ -17,6 +17,28 @@ class MY_model extends CI_Model
     }
 
     /**
+     * 获取列表
+     */
+    public function get_list($where=[],$field='*',$limit=0,$offset=0,$order_by=''){
+        $this->db->select($field);
+        $this->db->from($this->table_name);
+        if($where){
+            $this->db->where($where);
+        }
+        if($limit){
+            $this->db->limit($limit);
+        }
+        if($offset){
+            $this->db->offset($offset);
+        }
+        if($order_by){
+            $this->db->order_by($order_by);
+        }
+        $list = $this->db->get()->result_array();
+        return $list;
+    }
+
+    /**
      * 获取单行数据
      * @param $where
      * @param string $field

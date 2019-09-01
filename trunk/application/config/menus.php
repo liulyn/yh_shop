@@ -29,11 +29,11 @@ $config['menus'] = [
             ],
             [
                 'name' => '商品分类',
-                'index' => 'goods.category/index',
+                'index' => '/admin/goods/category_list',
                 'uris' => [
-                    'goods.category/index',
-                    'goods.category/add',
-                    'goods.category/edit',
+                    '/admin/goods/category_list',
+                    '/admin/goods/category_add',
+                    '/admin/goods/category_edit',
                 ],
             ]
         ],

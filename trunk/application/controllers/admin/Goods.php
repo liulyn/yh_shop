@@ -4,7 +4,7 @@ require_once(__DIR__ . '/Controller.php');
 
 /**
  * 商品管理控制器
- * Class Store
+ * Class Goods
  */
 class Goods extends Controller
 {
@@ -19,8 +19,21 @@ class Goods extends Controller
     public function index()
     {
     	$this->load->model('goods_model');
-		$list = $this->goods_model->get_list();
+		$list = $this->goods_model->get_list(['goods.store_id'=>$this->session->store['user']['store_id']]);
 //		p($list);die;
+        $this->load_view(compact('list'));
+    }
+
+
+    /**
+     * 商品分类列表
+     */
+    public function category_list()
+    {
+        $this->load->model('category_model');
+        $list = $this->category_model->get_list(['store_id'=>$this->session->store['user']['store_id']]);
+        $list = $this->category_model->category_tree($list);
+//        p($list);die;
         $this->load_view(compact('list'));
     }
 }
