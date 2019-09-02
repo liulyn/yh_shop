@@ -11,7 +11,7 @@
                             <div class="am-btn-toolbar">
                                 <div class="am-btn-group am-btn-group-xs">
                                     <a class="am-btn am-btn-default am-btn-success am-radius"
-                                       href="/admin/category/add">
+                                       href="/admin/goods/category_add">
                                         <span class="am-icon-plus"></span> 新增
                                     </a>
                                 </div>
@@ -56,7 +56,7 @@
                                         <td class="am-text-middle"><?= $two['create_time'] ?></td>
                                         <td class="am-text-middle">
                                             <div class="tpl-table-black-operation">
-                                                <a href="/admin/category/edit<?=$two['category_id']?>">
+                                                <a href="/admin/goods/category_edit<?=$two['category_id']?>">
                                                     <i class="am-icon-pencil"></i> 编辑
                                                 </a>
                                                 <a href="javascript:;" class="item-delete tpl-table-black-operation-del"
@@ -102,7 +102,7 @@
 <script>
     $(function () {
         // 删除元素
-        var url = "/admin/category/delete";
+        var url = "/admin/goods/category_delete";
         $('.item-delete').delete('category_id', url);
 
     });

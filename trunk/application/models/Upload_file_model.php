@@ -24,4 +24,13 @@ class Upload_file_model extends MY_model
 		}
 		return $url;
 	}
+
+	public function get_store_list($store_id,$group_id,$file_type='image'){
+        $this->db->where(['store_id'=>$store_id,'file_type' => $file_type, 'is_delete' => 0]);
+        if($group_id !== -1){
+            $this->db->where(compact('group_id'));
+        }
+        $this->db->order_by('file_id desc');
+        return $this->db->get($this->table_name)->result_array();
+    }
 }

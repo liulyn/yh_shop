@@ -384,12 +384,12 @@
             var loadIndex = layer.load();
             typeof params === 'function' && (success = params);
             // 获取文件库列表
-            $.getJSON(STORE_URL + '/upload.library/fileList', params, function (result) {
+            $.getJSON( '/admin/upload/file_list', params, function (result) {
                 layer.close(loadIndex);
-                if (result.code === 1) {
+                if (result.errorCode === 0) {
                     typeof success === 'function' && success(result.data);
                 } else {
-                    layer.msg(result.msg, {anim: 6});
+                    layer.msg(result.errorMessage, {anim: 6});
                 }
             });
         },
