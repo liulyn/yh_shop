@@ -184,7 +184,7 @@
         </div>
         <p class="file-name am-text-center am-text-truncate">{{ $value.file_name }}</p>
         <div class="select-mask">
-            <img src="assets/store/img/chose.png">
+            <img src="/assets/store/img/chose.png">
         </div>
     </li>
     {{ /each }}

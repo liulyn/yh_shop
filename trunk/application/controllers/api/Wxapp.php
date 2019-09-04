@@ -15,7 +15,7 @@ class Wxapp extends CI_Controller
 //        $wxapp = WxappModel::getWxappCache();
         $wxapp = [
             'navbar' => [
-                'wxapp_title' => '潮浏商',
+                'wxapp_title' => 'xxx',
                 'top_text_color' => [
                     'text' => '#ffffff',
                     'value' => 20,

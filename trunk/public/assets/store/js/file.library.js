@@ -135,12 +135,12 @@
                 }
                 layer.confirm('确定移动选中的文件吗？', {title: '友情提示'}, function (index) {
                     var load = layer.load();
-                    $.post(STORE_URL + '/upload.library/moveFiles', {
+                    $.post(STORE_URL + '/admin/upload/move_files', {
                         group_id: groupId
                         , fileIds: fileIds
                     }, function (result) {
-                        layer.msg(result.msg);
-                        if (result.code === 1) {
+                        layer.msg(result.errorMessage);
+                        if (result.errorCode === 0) {
                             _this.renderFileList();
                         }
                         layer.close(load);
@@ -163,11 +163,11 @@
                 }
                 layer.confirm('确定删除选中的文件吗？', {title: '友情提示'}, function (index) {
                     var load = layer.load();
-                    $.post(STORE_URL + '/upload.library/deleteFiles', {
+                    $.post(STORE_URL + '/admin/upload/delete_files', {
                         fileIds: fileIds
                     }, function (result) {
                         layer.close(load);
-                        if (result.code === 1) {
+                        if (result.errorCode === 0) {
                             _this.renderFileList();
                         }
                     });
@@ -189,7 +189,7 @@
                 // 选完文件后，是否自动上传。
                 auto: true,
                 // 文件接收服务端。
-                server: STORE_URL + '/upload/image',
+                server: STORE_URL + '/admin/upload/image',
                 // 选择文件的按钮。可选。
                 // 内部根据当前运行是创建，可能是input元素，也可能是flash.
                 pick: {
@@ -266,12 +266,12 @@
             _this.$element.on('click', '.group-add', function () {
                 layer.prompt({title: '请输入新分组名称'}, function (value, index) {
                     var load = layer.load();
-                    $.post(STORE_URL + '/upload.library/addGroup', {
+                    $.post(STORE_URL + '/admin/upload/add_group', {
                         group_name: value,
                         group_type: _this.options.type
                     }, function (result) {
-                        layer.msg(result.msg);
-                        if (result.code === 1) {
+                        layer.msg(result.errorMessage);
+                        if (result.errorCode === 0) {
                             $groupList.append(template('tpl-group-item', result.data));
                             var $groupSelectList = _this.$element.find('.group-select > .group-list');
                             $groupSelectList.append(
@@ -298,14 +298,15 @@
                     , group_id = $li.data('group-id');
                 layer.prompt({title: '修改分组名称', value: $li.attr('title')}, function (value, index) {
                     var load = layer.load();
-                    $.post(STORE_URL + '/upload.library/editGroup', {
+                    $.post(STORE_URL + '/admin/upload/edit_group', {
                         group_id: group_id
                         , group_name: value
                     }, function (result) {
-                        layer.msg(result.msg);
-                        if (result.code === 1) {
+                        layer.msg(result.errorMessage);
+                        if (result.errorCode === 0) {
                             $li.attr('title', value).find('.group-name').text(value);
                             var $groupSelectList = _this.$element.find('.group-select > .group-list');
+                            console.log($groupSelectList);
                             $groupSelectList.find('[data-group-id="' + group_id + '"]').text(value);
                         }
                         layer.close(load);
@@ -326,11 +327,11 @@
                     , group_id = $li.data('group-id');
                 layer.confirm('确定删除该分组吗？', {title: '友情提示'}, function (index) {
                     var load = layer.load();
-                    $.post(STORE_URL + '/upload.library/deleteGroup', {
+                    $.post(STORE_URL + '/admin/upload/delete_group', {
                         group_id: group_id
                     }, function (result) {
-                        layer.msg(result.msg);
-                        if (result.code === 1) {
+                        layer.msg(result.errorMessage);
+                        if (result.errorCode === 0) {
                             $li.remove();
                             var $groupSelectList = _this.$element.find('.group-select > .group-list');
                             $groupSelectList.find('[data-group-id="' + group_id + '"]').remove();
